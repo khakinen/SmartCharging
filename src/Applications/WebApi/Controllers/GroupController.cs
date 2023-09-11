@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SmartCharging.Application.WebApi.Models;
 using SmartCharging.Domain.Contract.Commands;
+using SmartCharging.Domain.Contract.Queries;
 
 namespace SmartCharging.Application.WebApi.Controllers;
 
@@ -14,6 +15,20 @@ public class GroupController : ControllerBase
     public GroupController(IMediator mediator)
     {
         _mediator = mediator;
+    }
+    
+    [HttpGet]
+    [Route("groups/{groupId}")]
+    public async Task<IActionResult> GetGroup(Guid groupId)
+    {
+        var query = new GroupQuery
+        {
+            Id = groupId
+        };
+        
+        var group = await _mediator.Send(query);
+
+        return Ok(group);
     }
 
     [HttpPost]

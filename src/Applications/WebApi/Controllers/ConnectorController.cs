@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SmartCharging.Application.WebApi.Models;
 using SmartCharging.Domain.Contract.Commands;
+using SmartCharging.Domain.Contract.Queries;
 
 namespace SmartCharging.Application.WebApi.Controllers;
 
@@ -14,6 +15,20 @@ public class ConnectorController : ControllerBase
     public ConnectorController(IMediator mediator)
     {
         _mediator = mediator;
+    }
+    
+    [HttpGet]
+    [Route("chargestations/{chargeStationId}/connectors")]
+    public async Task<IActionResult> GetConnectorsOfChargeStation(Guid chargeStationId)
+    {
+        var query = new ConnectorsOfChargeStationQuery
+        {
+            ChargeStationId = chargeStationId
+        };
+        
+        var connectors = await _mediator.Send(query);
+
+        return Ok(connectors);
     }
 
     [HttpPost]

@@ -36,4 +36,9 @@ public class GroupServiceValidationDecorator : IGroupService
     {
         return await _groupService.GetGroup(id);
     }
+
+    public async Task<ICollection<Group>> GetGroups()
+    {
+        return await _groupService.GetGroups();
+    }
 }

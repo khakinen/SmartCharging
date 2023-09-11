@@ -86,4 +86,12 @@ public class GroupRepository:  IGroupRepository
         
         return Map(record);
     }
+
+    public async Task<ICollection<Group>> ReadAll()
+    {
+        var records = await _smartChargingDbContext.Groups
+            .ToListAsync();
+
+        return records.Select(Map).ToList();
+    }
 }

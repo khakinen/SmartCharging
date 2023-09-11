@@ -5,14 +5,14 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/v1/groups/{groupId}/chargestations": {
-      "post": {
+    "/api/v1/chargestations/{chargeStationId}": {
+      "get": {
         "tags": [
           "ChargeStation"
         ],
         "parameters": [
           {
-            "name": "groupId",
+            "name": "chargeStationId",
             "in": "path",
             "required": true,
             "schema": {
@@ -21,33 +21,12 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateChargeStationRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateChargeStationRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateChargeStationRequest"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
           }
         }
-      }
-    },
-    "/api/v1/chargestations/{chargeStationId}": {
+      },
       "put": {
         "tags": [
           "ChargeStation"
@@ -110,7 +89,70 @@
         }
       }
     },
+    "/api/v1/groups/{groupId}/chargestations": {
+      "post": {
+        "tags": [
+          "ChargeStation"
+        ],
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChargeStationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChargeStationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChargeStationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/v1/chargestations/{chargeStationId}/connectors": {
+      "get": {
+        "tags": [
+          "Connector"
+        ],
+        "parameters": [
+          {
+            "name": "chargeStationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
       "post": {
         "tags": [
           "Connector"
@@ -234,6 +276,16 @@
       }
     },
     "/api/v1/groups": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
       "post": {
         "tags": [
           "Group"
@@ -265,6 +317,27 @@
       }
     },
     "/api/v1/groups/{groupId}": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
       "put": {
         "tags": [
           "Group"

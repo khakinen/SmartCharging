@@ -21,6 +21,17 @@ public class GroupController : ControllerBase
     }
     
     [HttpGet]
+    [Route("groups")]
+    public async Task<IActionResult> GetAllGroups()
+    {
+        var query = new GroupsQuery();
+        
+        var groups = await _mediator.Send(query);
+
+        return Ok(groups.Select(Map));
+    }
+    
+    [HttpGet]
     [Route("groups/{groupId}")]
     public async Task<IActionResult> GetGroup(Guid groupId)
     {

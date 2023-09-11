@@ -51,4 +51,9 @@ public class GroupService : IGroupService
     {
         return await _groupRepository.Read(id);
     }
+
+    public async Task<ICollection<Group>> GetGroups()
+    {
+        return await _groupRepository.ReadAll();
+    }
 }

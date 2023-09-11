@@ -9,4 +9,5 @@ public interface IGroupRepository
     Task<Group> Update(Guid id, UpdateGroupCommand group);
     Task Delete(Guid groupId);
     Task<Group> Read(Guid id);
+    Task<ICollection<Group>> ReadAll();
 }

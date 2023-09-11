@@ -8,4 +8,5 @@ public interface IGroupService
      Task<Group>  UpdateGroup(UpdateGroupCommand updateGroupCommand);
      Task<Group> CreateGroup(CreateGroupCommand createGroupCommand);
      Task<Group> GetGroup(Guid id);
+     Task<ICollection<Group>> GetGroups();
 }

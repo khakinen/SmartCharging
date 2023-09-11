@@ -28,6 +28,7 @@ Swagger page is accessible with https://localhost:5001/swagger/index.html  Never
 The architecture is designed on Enterprise level which will be able to handle any number of concurrent requests with running multiple instances behind a load balancer. Thanks to the applied UnitOfWork pattern, Data consistency will be solid.
 
 ## To run
+Make sure that net6.0 was already installed. 
 After having an SQL Server up and running, executing 'dotnet run' command will spin up the web service application.
 * src/Applications/WebApi> dotnet run
 

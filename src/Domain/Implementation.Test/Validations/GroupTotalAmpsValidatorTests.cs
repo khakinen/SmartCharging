@@ -43,7 +43,7 @@ public class GroupTotalAmpsValidatorTests
     {
         _groupRepository.Read(Arg.Any<Guid>()).Returns(new Group
         {
-            CapacityInAmps = groupMaxCapacity
+            Capacity = groupMaxCapacity
         });
         
         _connectorRepository.GetTotalMaxCurrentInAmpsOfGroup(Arg.Any<Guid>())
@@ -70,7 +70,7 @@ public class GroupTotalAmpsValidatorTests
         
         _groupRepository.Read(Arg.Any<Guid>()).Returns(new Group
         {
-            CapacityInAmps = groupMaxCapacity
+            Capacity = groupMaxCapacity
         });
         
         _connectorRepository.GetTotalMaxCurrentInAmpsOfGroup(Arg.Any<Guid>())
@@ -94,12 +94,12 @@ public class GroupTotalAmpsValidatorTests
         
         _groupRepository.Read(Arg.Any<Guid>()).Returns(new Group
         {
-            CapacityInAmps = groupMaxCapacity
+            Capacity = groupMaxCapacity
         });
 
         _connectorRepository.Read(Arg.Any<Guid>(), Arg.Any<int>()).Returns(new Connector
         {
-            MaxCurrentInAmps = currentWorkloadOfConnector
+            MaxCurrent = currentWorkloadOfConnector
         });
         
         _connectorRepository.GetTotalMaxCurrentInAmpsOfGroup(Arg.Any<Guid>())

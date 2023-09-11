@@ -39,7 +39,7 @@ public class GroupService : IGroupService
         {
             Id = Guid.NewGuid(),
             Name = command.Name,
-            CapacityInAmps = command.CapacityInAmps
+            Capacity = command.Capacity
         };
 
         await _groupRepository.Create(group);

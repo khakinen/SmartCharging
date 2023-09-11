@@ -4,6 +4,9 @@ using SmartCharging.Application.WebApi.Models;
 using SmartCharging.Domain.Contract.Commands;
 using SmartCharging.Domain.Contract.Queries;
 
+using Api = SmartCharging.Application.WebApi.Models;
+using Domain = SmartCharging.Domain.Contract.ChargeStations;
+
 namespace SmartCharging.Application.WebApi.Controllers;
 
 [ApiController]
@@ -28,7 +31,7 @@ public class ChargeStationController : ControllerBase
         
         var chargeStation = await _mediator.Send(query);
 
-        return Ok(chargeStation);
+        return Ok(Map(chargeStation));
     }
 
     [HttpPost]
@@ -43,7 +46,7 @@ public class ChargeStationController : ControllerBase
         
         var chargeStation = await _mediator.Send(command);
         
-        return Ok(chargeStation);
+        return Ok(Map(chargeStation));
     }
     
     [HttpPut]
@@ -59,7 +62,7 @@ public class ChargeStationController : ControllerBase
 
         var chargeStation = await _mediator.Send(command);
         
-        return Ok(chargeStation);
+        return Ok(Map(chargeStation));
     }
     
     [HttpDelete]
@@ -75,4 +78,12 @@ public class ChargeStationController : ControllerBase
         
         return Ok();
     }
+    
+    private Api::ChargeStation Map(Domain::ChargeStation chargeStation) =>
+        new Api::ChargeStation
+        {
+            Id = chargeStation.Id,
+            Name = chargeStation.Name,
+            GroupId = chargeStation.GroupId
+        };
 }

@@ -4,6 +4,9 @@ using SmartCharging.Application.WebApi.Models;
 using SmartCharging.Domain.Contract.Commands;
 using SmartCharging.Domain.Contract.Queries;
 
+using Api = SmartCharging.Application.WebApi.Models;
+using Domain = SmartCharging.Domain.Contract.Groups;
+
 namespace SmartCharging.Application.WebApi.Controllers;
 
 [ApiController]
@@ -28,7 +31,7 @@ public class GroupController : ControllerBase
         
         var group = await _mediator.Send(query);
 
-        return Ok(group);
+        return Ok(Map(group));
     }
 
     [HttpPost]
@@ -38,17 +41,12 @@ public class GroupController : ControllerBase
         var command = new CreateGroupCommand
         {
             Name = request.Name,
-            CapacityInAmps = request.CapacityInAmps
+            Capacity = request.CapacityInAmps
         };
         
         var group = await _mediator.Send(command);
 
-        return Ok(new
-        {
-            group.Id,
-            group.Name,
-            group.CapacityInAmps
-        });
+        return Ok(Map(group));
     }
 
     [HttpPut]
@@ -59,17 +57,12 @@ public class GroupController : ControllerBase
         {
             GroupId = groupId,
             Name = request.Name,
-            CapacityInAmps = request.CapacityInAmps,
+            Capacity = request.CapacityInAmps,
         };
         
         var group = await _mediator.Send(command);
 
-        return Ok(new
-        {
-            group.Id,
-            group.Name,
-            group.CapacityInAmps
-        });
+        return Ok(Map(group));
     }
 
     [HttpDelete]
@@ -85,5 +78,13 @@ public class GroupController : ControllerBase
         
         return Ok();
     }
+    
+    private Api::Group Map(Domain::Group group) =>
+        new Api::Group
+        {
+            Id = group.Id,
+            Name = group.Name,
+            Capacity = group.Capacity
+        };
 }
 

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using SmartCharging.Application.WebApi.Models;
 using SmartCharging.Domain.Contract.Commands;
 using SmartCharging.Domain.Contract.Queries;
+using Api = SmartCharging.Application.WebApi.Models;
+using Domain = SmartCharging.Domain.Contract.Connectors;
 
 namespace SmartCharging.Application.WebApi.Controllers;
 
@@ -10,13 +12,13 @@ namespace SmartCharging.Application.WebApi.Controllers;
 [Route("api/v1")]
 public class ConnectorController : ControllerBase
 {
-    private readonly  IMediator _mediator;
+    private readonly IMediator _mediator;
 
     public ConnectorController(IMediator mediator)
     {
         _mediator = mediator;
     }
-    
+
     [HttpGet]
     [Route("chargestations/{chargeStationId}/connectors")]
     public async Task<IActionResult> GetConnectorsOfChargeStation(Guid chargeStationId)
@@ -25,10 +27,10 @@ public class ConnectorController : ControllerBase
         {
             ChargeStationId = chargeStationId
         };
-        
+
         var connectors = await _mediator.Send(query);
 
-        return Ok(connectors);
+        return Ok(connectors.Select(Map));
     }
 
     [HttpPost]
@@ -37,15 +39,15 @@ public class ConnectorController : ControllerBase
     {
         var command = new CreateConnectorCommand
         {
-            MaxCurrentInAmps = request.MaxCurrentInAmps,
+            MaxCurrent = request.MaxCurrentInAmps,
             ChargeStationId = chargeStationId,
         };
-        
+
         command.ChargeStationId = chargeStationId;
-        
+
         var connector = await _mediator.Send(command);
-        
-        return Ok(connector);
+
+        return Ok(Map(connector));
     }
 
     [HttpPut]
@@ -54,17 +56,17 @@ public class ConnectorController : ControllerBase
     {
         var command = new UpdateConnectorCommand
         {
-            MaxCurrentInAmps = request.MaxCurrentInAmps,
+            MaxCurrent = request.MaxCurrentInAmps,
             ChargeStationId = chargeStationId,
             ConnectorNumber = connectorNumber
         };
-        
+
         command.ChargeStationId = chargeStationId;
         command.ConnectorNumber = connectorNumber;
-          
+
         var connector = await _mediator.Send(command);
 
-        return Ok(connector);
+        return Ok(Map(connector));
     }
 
     [HttpDelete]
@@ -76,9 +78,17 @@ public class ConnectorController : ControllerBase
             ChargeStationId = chargeStationId,
             ConnectorNumber = connectorNumber
         };
-        
+
         await _mediator.Send(command);
-        
+
         return Ok();
     }
+
+    private Api::Connector Map(Domain::Connector connector) =>
+        new Api::Connector
+        {
+            ConnectorNumber = connector.ConnectorNumber,
+            MaxCurrent = connector.MaxCurrent,
+            ChargeStationId = connector.ChargeStationId,
+        };
 }

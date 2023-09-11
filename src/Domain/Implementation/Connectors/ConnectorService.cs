@@ -43,7 +43,7 @@ public class ConnectorService : IConnectorService
         return new Connector
         {
             ConnectorNumber = createConnectorCommand.ConnectorNumber,
-            MaxCurrentInAmps = createConnectorCommand.MaxCurrentInAmps,
+            MaxCurrent = createConnectorCommand.MaxCurrent,
             ChargeStationId = createConnectorCommand.ChargeStationId
         };
     }

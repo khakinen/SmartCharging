@@ -37,7 +37,7 @@ public class ConnectorServiceTests
             fakeConnectors.Add(new Connector
             {
                 ConnectorNumber = existingConnectorNumbers[i],
-                MaxCurrentInAmps = 77,
+                MaxCurrent = 77,
                 ChargeStationId = fakeChargeStationId
             });
         }

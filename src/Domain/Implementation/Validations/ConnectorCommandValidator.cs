@@ -7,6 +7,6 @@ public sealed class ConnectorCommandValidator : AbstractValidator<ConnectorComma
 {
     public ConnectorCommandValidator()
     {
-        RuleFor(x => x.MaxCurrentInAmps).NotEmpty().GreaterThan(0).WithMessage("MaxCurrentInAmps can not be lower than zero");
+        RuleFor(x => x.MaxCurrent).NotEmpty().GreaterThan(0).WithMessage("MaxCurrentInAmps can not be lower than zero");
     }
 }

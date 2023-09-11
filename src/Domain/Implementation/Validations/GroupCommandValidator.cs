@@ -9,6 +9,6 @@ public sealed class GroupCommandValidator : AbstractValidator<GroupCommand>
     {
         RuleFor(x => x.Name).NotEmpty().WithMessage("Name can not be empty");
 
-        RuleFor(x => x.CapacityInAmps).NotEmpty().GreaterThan(0).WithMessage("CapacityInAmps can not be lower than zero");;
+        RuleFor(x => x.Capacity).NotEmpty().GreaterThan(0).WithMessage("CapacityInAmps can not be lower than zero");;
     }
 }

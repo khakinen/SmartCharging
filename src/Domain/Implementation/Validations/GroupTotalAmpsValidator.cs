@@ -35,9 +35,9 @@ public class GroupTotalAmpsValidator : IGroupTotalAmpsValidator
 
         var currentTotalOfAddingChargeStation = await _connectorRepository.GetTotalMaxCurrentInAmpsOfChargeStation(addingChargeStationId);
         
-        if (group.CapacityInAmps < (currentTotalOfGroup + currentTotalOfAddingChargeStation))
+        if (group.Capacity < (currentTotalOfGroup + currentTotalOfAddingChargeStation))
         {
-            throw new ValidationException($"group capacity can not be exceeded : {group.CapacityInAmps} < {currentTotalOfGroup} + {currentTotalOfAddingChargeStation}");
+            throw new ValidationException($"group capacity can not be exceeded : {group.Capacity} < {currentTotalOfGroup} + {currentTotalOfAddingChargeStation}");
         }
     }
 
@@ -48,9 +48,9 @@ public class GroupTotalAmpsValidator : IGroupTotalAmpsValidator
         
         var currentTotalOfGroup = await _connectorRepository.GetTotalMaxCurrentInAmpsOfGroup(chargeStation.GroupId);
 
-        if (group.CapacityInAmps < (currentTotalOfGroup + addingMaxCurrentInAmps))
+        if (group.Capacity < (currentTotalOfGroup + addingMaxCurrentInAmps))
         {
-            throw new ValidationException($"group capacity can not be exceeded : {group.CapacityInAmps} < {currentTotalOfGroup} + {addingMaxCurrentInAmps}");
+            throw new ValidationException($"group capacity can not be exceeded : {group.Capacity} < {currentTotalOfGroup} + {addingMaxCurrentInAmps}");
         }
     }
 
@@ -62,9 +62,9 @@ public class GroupTotalAmpsValidator : IGroupTotalAmpsValidator
         
         var currentTotalOfGroup = await _connectorRepository.GetTotalMaxCurrentInAmpsOfGroup(chargeStation.GroupId);
 
-        if (group.CapacityInAmps < (currentTotalOfGroup - connector.MaxCurrentInAmps + newMaxCurrentInAmps))
+        if (group.Capacity < (currentTotalOfGroup - connector.MaxCurrent + newMaxCurrentInAmps))
         {
-            throw new ValidationException($"group capacity can not be exceeded : {group.CapacityInAmps} < {currentTotalOfGroup} - {connector.MaxCurrentInAmps} + {newMaxCurrentInAmps}");
+            throw new ValidationException($"group capacity can not be exceeded : {group.Capacity} < {currentTotalOfGroup} - {connector.MaxCurrent} + {newMaxCurrentInAmps}");
         }
     }
 }

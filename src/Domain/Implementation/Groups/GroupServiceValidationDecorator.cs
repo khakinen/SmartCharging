@@ -22,7 +22,7 @@ public class GroupServiceValidationDecorator : IGroupService
 
     public async Task<Group> UpdateGroup(UpdateGroupCommand updateGroupCommand)
     {
-        await _groupTotalAmpsValidator.ValidateForCapacityInAmpsUpdate(updateGroupCommand.GroupId, updateGroupCommand.CapacityInAmps);
+        await _groupTotalAmpsValidator.ValidateForCapacityInAmpsUpdate(updateGroupCommand.GroupId, updateGroupCommand.Capacity);
 
         return await _groupService.UpdateGroup(updateGroupCommand);
     }

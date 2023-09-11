@@ -28,14 +28,14 @@ public class ConnectorServiceValidationDecorator : IConnectorService
 
     public async Task<Connector> CreateConnector(CreateConnectorCommand command)
     {
-        await _groupTotalAmpsValidator.ValidateForConnectorAddition(command.MaxCurrentInAmps, command.ChargeStationId);
+        await _groupTotalAmpsValidator.ValidateForConnectorAddition(command.MaxCurrent, command.ChargeStationId);
 
         return await _connectorService.CreateConnector(command);
     }
 
     public async Task<Connector> UpdateConnector(UpdateConnectorCommand command)
     {
-        await _groupTotalAmpsValidator.ValidateForConnectorUpdate(command.MaxCurrentInAmps, command.ChargeStationId, command.ConnectorNumber);
+        await _groupTotalAmpsValidator.ValidateForConnectorUpdate(command.MaxCurrent, command.ChargeStationId, command.ConnectorNumber);
 
         return await _connectorService.UpdateConnector(command);
     }

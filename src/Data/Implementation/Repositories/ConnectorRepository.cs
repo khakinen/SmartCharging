@@ -3,7 +3,7 @@ using SmartCharging.Data.Contract.Repositories;
 using SmartCharging.Domain.Contract.Commands;
 using SmartCharging.Domain.Contract.Exceptions;
 using SmartCharging.Domain.Contract.Groups;
-
+using SmartCharging.Domain.Contract.ValueTypes;
 using Connector = SmartCharging.Domain.Contract.Connectors.Connector;
 using ConnectorRecord = SmartCharging.Data.Contract.Models.Connector;
 
@@ -82,7 +82,7 @@ public class ConnectorRepository: IConnectorRepository
             throw new NotFoundException($"{nameof(Connector)}");
         }
 
-        record.MaxCurrentInAmps = updateConnectorCommand.MaxCurrentInAmps;
+        record.MaxCurrentInAmps = updateConnectorCommand.MaxCurrent;
 
         return Map(record);
     }
@@ -103,7 +103,7 @@ public class ConnectorRepository: IConnectorRepository
         {
             Id = Guid.NewGuid(),
             ConnectorNumber = createConnectorCommand.ConnectorNumber,
-            MaxCurrentInAmps = createConnectorCommand.MaxCurrentInAmps,
+            MaxCurrentInAmps = createConnectorCommand.MaxCurrent,
             ChargeStationId = createConnectorCommand.ChargeStationId
         };
     }
@@ -113,7 +113,7 @@ public class ConnectorRepository: IConnectorRepository
         return new Connector
         {
             ConnectorNumber = record.ConnectorNumber,
-            MaxCurrentInAmps = record.MaxCurrentInAmps,
+            MaxCurrent = record.MaxCurrentInAmps,
             ChargeStationId = record.ChargeStationId
         };
     }

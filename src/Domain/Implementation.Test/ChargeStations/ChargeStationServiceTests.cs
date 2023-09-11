@@ -22,7 +22,7 @@ public class ChargeStationServiceTests
         var fakeConnectors = Enumerable.Range(0, 5).Select(i => new Connector
         {
             ConnectorNumber = i,
-            MaxCurrentInAmps = 77,
+            MaxCurrent = 77,
             ChargeStationId = fakeChargeStationId
         }).ToList();
 

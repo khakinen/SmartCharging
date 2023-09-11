@@ -28,7 +28,7 @@ public class GroupRepository:  IGroupRepository
         {
             Id = group.Id,
             Name = group.Name,
-            CapacityInAmps = group.CapacityInAmps,
+            CapacityInAmps = group.Capacity,
         };
     }
 
@@ -44,7 +44,7 @@ public class GroupRepository:  IGroupRepository
         }
 
         record.Name = updateGroupCommand.Name;
-        record.CapacityInAmps = updateGroupCommand.CapacityInAmps;
+        record.CapacityInAmps = updateGroupCommand.Capacity;
         
         return Map(record);
     }
@@ -55,7 +55,7 @@ public class GroupRepository:  IGroupRepository
         {
             Id = record.Id,
             Name = record.Name,
-            CapacityInAmps = record.CapacityInAmps,
+            Capacity = record.CapacityInAmps,
         };
     }
 
